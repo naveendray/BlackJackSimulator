@@ -25,5 +25,6 @@ public class Test {
             myset.add(rand.nextInt(10));
         }
         System.out.println(myset);
+        System.out.println("This is created from yin");
     }
 }
