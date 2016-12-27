@@ -17,24 +17,24 @@ public class CardPack {
     private List<Card> pack;
     private Card tempCard;
     private String[] types = {"Diomonds", "Hearts", "Spades", "Clubs"};
+    private String tempType;
 
+// create a single cardpack of 52 cards
     public List<Card> createPack() {
 
         pack = new ArrayList();
         for (int i = 0; i < 4; i++) {
-            System.out.println(i);
-            tempCard = new Card( types[i]);
+            tempType = types[i];
             for (int j = 0; j < 13; j++) {
-                tempCard.setValue(j+1);
-                System.out.println(j);
+                tempCard = new Card(j + 1, tempType);
                 tempCard.setDisplayValue(DetermineDisplayValue(tempCard));
                 pack.add(tempCard);
-                System.out.println("Card added to pack" + tempCard.getDisplayValue() + tempCard.getType() + tempCard.getValue());
             }
         }
         return pack;
     }
 
+    //Determine cards display value(can be numaric or A,J,Q,K)
     private String DetermineDisplayValue(Card card) {
         if (card.getValue() > 1 && card.getValue() < 10) {
             return String.valueOf(card.getValue());
@@ -56,12 +56,12 @@ public class CardPack {
         }
     }
 
-    public static void main(String[] args) {
-        CardPack cp = new CardPack();
-        for (Card card : cp.createPack()) {
-            System.out.println("New card created " + card.getDisplayValue() + card.getType() + card.getValue());
-            System.out.println(cp.pack.size());
-        }
-    }
+//    public static void main(String[] args) {
+//        CardPack cp = new CardPack();
+//        for (Card card : cp.createPack()) {
+//            System.out.println("New card created " + card.getDisplayValue() + card.getType() + card.getValue());
+//            System.out.println(cp.pack.size());
+//        }
+//    }
 
 }
