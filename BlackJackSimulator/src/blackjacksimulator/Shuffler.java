@@ -22,7 +22,7 @@ public class Shuffler {
     int pileSize;
     Random rand;
 
-    public Stack<Card> shuffle(int numberOfPacks) {
+    public Stack<Card> getShuffledStack(int numberOfPacks) {
 
         rand = new Random();
         shuffledPile = new Stack<Card>();
@@ -32,8 +32,7 @@ public class Shuffler {
         for (int i = 0; i < numberOfPacks; i++) {
             pile.addAll(new CardPack().createPack());
         }
-        
-        
+
         System.out.println("number of cards in the pile = " + pile.size());
         int shPiles = rand.nextInt(5) + rand.nextInt(300) + 100;
         tempPile = new ArrayList<>();
@@ -43,15 +42,13 @@ public class Shuffler {
 //        random value for a select random list
         int selectList;
         int tempFilesize = tempPile.size();
-        
         int pileSize = pile.size();
 //        seperate cards in list pile to number of seperate lists
         for (int i = 0; i < pileSize; i++) {
             selectList = rand.nextInt(tempFilesize);
             tempPile.get(selectList).add(pile.pop());
         }
-            
-        
+
 //        add all the cads in lists in tempPile to shuffledPile
         for (List<Card> list : tempPile) {
             for (Card card : list) {
@@ -60,17 +57,6 @@ public class Shuffler {
         }
 
         return shuffledPile;
-    }
-
-    public static void main(String[] args) {
-        System.out.println("Starting point of the main method");
-        Shuffler s = new Shuffler();
-        Stack<Card> x = s.shuffle(1);
-        int some = x.size();
-        for (int i = 0; i < some; i++) {
-            System.out.println(x.pop().getValue());
-        }
-        System.out.println("Ending point of the main method");
     }
 
 }
