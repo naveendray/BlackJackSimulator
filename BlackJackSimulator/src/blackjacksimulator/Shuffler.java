@@ -17,53 +17,60 @@ import java.util.Stack;
 public class Shuffler {
 
     Stack<Card> pile;
-    List<Card> shuffledPile;
+    Stack<Card> shuffledPile;
     List<List<Card>> tempPile;
     int pileSize;
+    Random rand;
 
-    private List<Card> shuffle(int numberOfPacks) {
-        pile = new Stack();
+    public Stack<Card> shuffle(int numberOfPacks) {
+
+        rand = new Random();
+        shuffledPile = new Stack<Card>();
+        pile = new Stack<Card>();
+
+        //create given number of card packs and add all of them to the list pile
         for (int i = 0; i < numberOfPacks; i++) {
             pile.addAll(new CardPack().createPack());
         }
-//        for (Card card : pile) {
-//            System.out.println(card.getValue() + card.getType());
-//        }
-        pileSize = numberOfPacks * 52;
         
-        int shPiles = new Random().nextInt(5) + 3;
-        System.out.println(shPiles);
+        
+        System.out.println("number of cards in the pile = " + pile.size());
+        int shPiles = rand.nextInt(5) + rand.nextInt(300) + 100;
         tempPile = new ArrayList<>();
         for (int i = 0; i < shPiles; i++) {
-            System.out.println("here");
             tempPile.add(new ArrayList<Card>());
-            System.out.println("added");
-            System.out.println(tempPile.size());
         }
+//        random value for a select random list
+        int selectList;
+        int tempFilesize = tempPile.size();
         
-            int selectList = new Random(tempPile.size()).nextInt();
-        for (int i = 0; i < pile.size(); i++) {
-            System.out.println("selectList ="+selectList);
-            System.out.println("poped");
+        int pileSize = pile.size();
+//        seperate cards in list pile to number of seperate lists
+        for (int i = 0; i < pileSize; i++) {
+            selectList = rand.nextInt(tempFilesize);
             tempPile.get(selectList).add(pile.pop());
         }
+            
         
-        for (List list : tempPile) {
-            shuffledPile.addAll(list);
-        }
-        
-        for (Card card : shuffledPile) {
-            System.out.println(card.getValue());
+//        add all the cads in lists in tempPile to shuffledPile
+        for (List<Card> list : tempPile) {
+            for (Card card : list) {
+                shuffledPile.add(card);
+            }
         }
 
         return shuffledPile;
     }
 
     public static void main(String[] args) {
-        System.out.println("something");
-        int i = 0;
-        new Shuffler().shuffle(2);
-        System.out.println(i);
+        System.out.println("Starting point of the main method");
+        Shuffler s = new Shuffler();
+        Stack<Card> x = s.shuffle(1);
+        int some = x.size();
+        for (int i = 0; i < some; i++) {
+            System.out.println(x.pop().getValue());
+        }
+        System.out.println("Ending point of the main method");
     }
 
 }
