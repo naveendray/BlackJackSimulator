@@ -6,10 +6,9 @@
 package blackjacksimulator;
 
 import java.util.ArrayList;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Random;
-import java.util.Set;
+import java.util.Stack;
 
 /**
  *
@@ -17,19 +16,46 @@ import java.util.Set;
  */
 public class Shuffler {
 
-    List<Card> pile;
+    Stack<Card> pile;
     List<Card> shuffledPile;
-        int pileSize ;
+    List<List<Card>> tempPile;
+    int pileSize;
 
     private List<Card> shuffle(int numberOfPacks) {
-        pile = new ArrayList();
-        for (int i = 0; i < numberOfPacks; i++){
+        pile = new Stack();
+        for (int i = 0; i < numberOfPacks; i++) {
             pile.addAll(new CardPack().createPack());
         }
-        for (Card card : pile) {
-            System.out.println(card.getValue()+card.getType());
+//        for (Card card : pile) {
+//            System.out.println(card.getValue() + card.getType());
+//        }
+        pileSize = numberOfPacks * 52;
+        
+        int shPiles = new Random().nextInt(5) + 3;
+        System.out.println(shPiles);
+        tempPile = new ArrayList<>();
+        for (int i = 0; i < shPiles; i++) {
+            System.out.println("here");
+            tempPile.add(new ArrayList<Card>());
+            System.out.println("added");
+            System.out.println(tempPile.size());
         }
-        pileSize =  numberOfPacks * 52;
+        
+            int selectList = new Random(tempPile.size()).nextInt();
+        for (int i = 0; i < pile.size(); i++) {
+            System.out.println("selectList ="+selectList);
+            System.out.println("poped");
+            tempPile.get(selectList).add(pile.pop());
+        }
+        
+        for (List list : tempPile) {
+            shuffledPile.addAll(list);
+        }
+        
+        for (Card card : shuffledPile) {
+            System.out.println(card.getValue());
+        }
+
         return shuffledPile;
     }
 
