@@ -5,6 +5,8 @@
  */
 package blackjacksimulator;
 
+import java.util.Stack;
+
 /**
  *
  * @author yasitha
@@ -16,8 +18,9 @@ public class BlackJackSimulator {
      */
     public static void main(String[] args) {
         System.out.println("Black jack simulator started");
+        Shuffler shuffler = new Shuffler();
+        Stack<Card> pile = shuffler.getShuffledStack(2);
         
-        //Test Shuffler
     }
     
 }
